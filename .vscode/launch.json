@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Forever Young (Debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "cwd": "C:\\Users\\Reynaldi\\Documents\\App Forever Young"
+    },
+    {
+      "name": "Forever Young (Release)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "cwd": "C:\\Users\\Reynaldi\\Documents\\App Forever Young"
+    }
+  ]
+}
