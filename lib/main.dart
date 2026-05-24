@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'app.dart';
 import 'providers/settings_provider.dart';
 
@@ -8,6 +9,10 @@ import 'providers/settings_provider.dart';
 /// Initializes providers and loads saved settings before rendering.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive for temporary image path storage
+  await Hive.initFlutter();
+  await Hive.openBox('temp_scan_box');
 
   // Lock orientation to portrait for elderly users (simpler experience)
   await SystemChrome.setPreferredOrientations([

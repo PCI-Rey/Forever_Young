@@ -1,71 +1,161 @@
-/// Placeholder service for future ML-based expiration date scanning.
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+
+/// Service that communicates with the Forever Young ML API server.
+/// Sends an image to the FastAPI backend (YOLOv11 + PARSeq) and
+/// returns a structured [ScanResult].
 ///
-/// This class provides the interface that will be implemented
-/// when the ML model is integrated. Currently returns mock data.
-///
-/// Future integration steps:
-/// 1. Add camera package (e.g., camera, image_picker)
-/// 2. Add ML inference package (e.g., tflite_flutter, google_mlkit_text_recognition)
-/// 3. Implement [scanImage] to process camera frames
-/// 4. Parse recognized text to extract date patterns
-/// 5. Return structured [ScanResult] with confidence score
+/// NOTE: All date parsing, formatting, and validation is handled
+/// by the Python API (which contains the full notebook pipeline logic).
+/// Flutter does NOT re-parse dates locally to avoid overriding the
+/// server's authoritative output.
 class MlScanService {
-  /// Simulates scanning an image for expiration date.
-  ///
-  /// In production, this will:
-  /// - Accept a camera image/frame
-  /// - Run ML text recognition
-  /// - Parse date patterns from recognized text
-  /// - Return structured result
-  Future<ScanResult> scanImage() async {
-    // Simulate processing delay
-    await Future.delayed(const Duration(seconds: 2));
+  /// Base URL of the FastAPI server (e.g. "http://192.168.1.5:8000").
+  final String baseUrl;
 
-    // Return mock result (Hardcoded for testing)
-    return const ScanResult(
-      isSuccess: true,
-      expirationDate: '15 Agustus 2026', // Updated to more natural date for TTS
-      isExpired: true, // Mocking as expired as requested
-      confidence: 0.92,
-      rawText: 'EXP 15/08/2026',
-    );
+  MlScanService({required this.baseUrl});
+
+  /// Send [imageFile] to the /scan endpoint and return a [ScanResult].
+  Future<ScanResult> scanImage(XFile imageFile) async {
+    final uri = Uri.parse('$baseUrl/scan');
+
+    final request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
+
+    try {
+      final streamedResponse =
+          await request.send().timeout(const Duration(seconds: 30));
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        if (data['success'] == true) {
+          final expData  = data['expired_date']    as Map<String, dynamic>?;
+          final prodData = data['production_date'] as Map<String, dynamic>?;
+
+          // ── Use server output directly (Python API = authoritative source) ──
+          // formatted: "DD/MM/YYYY" | "MM/YYYY" | "not detected"
+          // human:     "D Bulan YYYY" | "Bulan YYYY" | "not detected"
+          final expFormatted  = expData?['formatted']  as String?;
+          final expHuman      = expData?['human']       as String?;
+          final expRaw        = expData?['raw']         as String?;
+          final prodFormatted = prodData?['formatted'] as String?;
+          final prodHuman     = prodData?['human']      as String?;
+
+          // Use server's is_expired (computed from the same Python logic)
+          final isExpiredFinal = data['is_expired'] as bool? ?? false;
+
+          // Display string: use formatted from server
+          // If "not detected", pass null so UI can handle it gracefully
+          final expDisplay  = (expFormatted  == 'not detected' || expFormatted  == null)
+              ? null : expFormatted;
+          final prodDisplay = (prodFormatted == 'not detected' || prodFormatted == null)
+              ? null : prodFormatted;
+
+          return ScanResult(
+            isSuccess: true,
+            expirationDate:  expDisplay,
+            productionDate:  prodDisplay,
+            expirationHuman: (expHuman  == 'not detected') ? null : expHuman,
+            productionHuman: (prodHuman == 'not detected') ? null : prodHuman,
+            isExpired:   isExpiredFinal,
+            confidence:  (data['confidence'] as num?)?.toDouble(),
+            rawText:     expRaw,
+          );
+        } else {
+          return ScanResult(
+            isSuccess: false,
+            errorMessage: data['error'] as String? ?? 'Scan gagal',
+          );
+        }
+      } else {
+        return ScanResult(
+          isSuccess: false,
+          errorMessage: 'Server error: ${response.statusCode}',
+        );
+      }
+    } on SocketException {
+      return ScanResult(
+        isSuccess: false,
+        errorMessage:
+            'Tidak dapat terhubung ke server. Pastikan server aktif dan IP sudah benar.',
+      );
+    } on http.ClientException {
+      return ScanResult(
+        isSuccess: false,
+        errorMessage: 'Koneksi ke server gagal.',
+      );
+    } catch (e) {
+      return ScanResult(
+        isSuccess: false,
+        errorMessage: 'Error: $e',
+      );
+    }
   }
 
-  /// Placeholder: Initialize ML model resources.
-  Future<void> initialize() async {
-    // TODO: Load TFLite model or initialize ML Kit
+  /// Check if the server is reachable.
+  Future<bool> isServerReachable() async {
+    try {
+      final response = await http
+          .get(Uri.parse('$baseUrl/health'))
+          .timeout(const Duration(seconds: 5));
+      return response.statusCode == 200;
+    } catch (_) {
+      return false;
+    }
   }
 
-  /// Placeholder: Release ML model resources.
-  Future<void> dispose() async {
-    // TODO: Release model resources
-  }
+  Future<void> initialize() async {}
+  Future<void> dispose() async {}
 }
 
 /// Structured result from an ML scan operation.
 class ScanResult {
   final bool isSuccess;
+
+  /// Formatted date string from server: "DD/MM/YYYY" | "MM/YYYY" | null
   final String? expirationDate;
-  final bool isExpired; // New property
+
+  /// Formatted date string from server: "DD/MM/YYYY" | "MM/YYYY" | null
+  final String? productionDate;
+
+  /// Human-readable expiry: "D Bulan YYYY" | "Bulan YYYY" | null
+  final String? expirationHuman;
+
+  /// Human-readable production: "D Bulan YYYY" | "Bulan YYYY" | null
+  final String? productionHuman;
+
+  final bool isExpired;
   final double? confidence;
+
+  /// Raw OCR text from PARSeq (before formatting)
   final String? rawText;
+
   final String? errorMessage;
 
   const ScanResult({
     required this.isSuccess,
     this.isExpired = false,
     this.expirationDate,
+    this.productionDate,
+    this.expirationHuman,
+    this.productionHuman,
     this.confidence,
     this.rawText,
     this.errorMessage,
   });
 
-  /// Empty/default result before scanning.
   factory ScanResult.empty() {
     return const ScanResult(
       isSuccess: false,
       isExpired: false,
       expirationDate: null,
+      productionDate: null,
+      expirationHuman: null,
+      productionHuman: null,
       confidence: null,
       rawText: null,
     );

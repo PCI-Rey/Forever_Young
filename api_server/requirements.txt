@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+Pillow
+torch
+torchvision
+ultralytics
+pytorch-lightning
+hydra-core
+timm
+einops

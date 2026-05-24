@@ -6,6 +6,8 @@ class LocalStorageService {
   static const String _languageKey = 'selected_language';
   static const String _themeKey = 'selected_theme';
   static const String _onboardingCompleteKey = 'onboarding_complete';
+  static const String _setupCompleteKey = 'setup_complete';
+  static const String _serverIpKey = 'server_ip';
 
   /// Save the selected language code ('en' or 'id').
   static Future<void> saveLanguage(String languageCode) async {
@@ -41,6 +43,30 @@ class LocalStorageService {
   static Future<bool> isOnboardingComplete() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_onboardingCompleteKey) ?? false;
+  }
+
+  /// Mark the full first-launch setup (language + theme + onboarding) as done.
+  static Future<void> setSetupComplete() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_setupCompleteKey, true);
+  }
+
+  /// Check if the first-launch setup has been completed.
+  static Future<bool> isSetupComplete() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_setupCompleteKey) ?? false;
+  }
+
+  /// Save the ML API Server IP address.
+  static Future<void> saveServerIp(String ip) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_serverIpKey, ip);
+  }
+
+  /// Get the saved ML API Server IP. Defaults to empty string.
+  static Future<String> getServerIp() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_serverIpKey) ?? '';
   }
 
   /// Clear all saved preferences (useful for testing/reset).

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/admin_screen.dart';
 import '../screens/splash_screen.dart';
 import '../screens/language_theme_screen.dart';
 import '../screens/onboarding_screen.dart';
@@ -13,6 +14,7 @@ class AppRoutes {
   static const String languageTheme = '/language-theme';
   static const String onboarding = '/onboarding';
   static const String scan = '/scan';
+  static const String admin = '/admin';
 
   /// Route map for MaterialApp.
   static Map<String, WidgetBuilder> get routes => {
@@ -20,6 +22,7 @@ class AppRoutes {
         languageTheme: (_) => const LanguageThemeScreen(),
         onboarding: (_) => const OnboardingScreen(),
         scan: (_) => const ScanScreen(),
+        admin: (_) => const AdminScreen(),
       };
 
   /// Navigate with a forward slide transition (no back gesture).

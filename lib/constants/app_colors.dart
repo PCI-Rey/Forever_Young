@@ -7,7 +7,9 @@ class AppColors {
 
   // ─── Playful & Warm Accents ───
   static const Color warmCoral = Color(0xFFFF7A59);
-  static const Color softPeach = Color(0xFFFFF9F0);
+  static const Color softPeach = Color(
+    0xFFFFF8F2,
+  ); // Krem hangat premium/Warm Cotton
 
   // ─── Primary Palette (Calming Teal/Medical Green) ───
   static const Color primaryLight = Color(0xFF2E9E83);
@@ -16,7 +18,7 @@ class AppColors {
 
   // ─── Background & Surface ───
   // backgroundLight synced with Splash Screen's softPeach
-  static const Color backgroundLight = softPeach; 
+  static const Color backgroundLight = softPeach;
   static const Color backgroundDark = Color(0xFF1A1D23);
   static const Color surfaceLight = Color(0xFFFFFFFF);
   static const Color surfaceDark = Color(0xFF252830);
@@ -34,6 +36,7 @@ class AppColors {
   static const Color warning = Color(0xFFFF9800);
   static const Color error = Color(0xFFE53935);
   static const Color info = Color(0xFF2196F3);
+  static const Color productionBlue = Color(0xFF00B4D8);
 
   // ─── Button Colors ───
   // Making primary buttons use the friendly warmCoral
@@ -49,7 +52,7 @@ class AppColors {
   // ─── Splash Screen Gradient (Legacy / Specific uses) ───
   static const Color splashGradientStart = Color(0xFF2E9E83);
   static const Color splashGradientEnd = Color(0xFF1B7A63);
-  static const Color ivoryBackground = Color(0xFFF9FBF9); 
+  static const Color ivoryBackground = Color(0xFFF9FBF9);
   static const Color zenLogoGlow = Color(0x332E9E83);
 
   // ─── Scan Screen ───

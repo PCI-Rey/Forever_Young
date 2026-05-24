@@ -62,8 +62,8 @@ class AppText {
       'Point the camera at the expiration date on the product label';
   static const String scanInstructionId =
       'Arahkan kamera ke tanggal kedaluwarsa pada label produk';
-  static const String scanButtonEn = 'Scan Now';
-  static const String scanButtonId = 'Scan Sekarang';
+  static const String scanButtonEn = 'Scan from Camera';
+  static const String scanButtonId = 'Scan dari Kamera';
   static const String expiryLabelEn = 'Expiration Date';
   static const String expiryLabelId = 'Tanggal Kedaluwarsa';
   static const String expiryPlaceholder = '--/--/----';
@@ -75,12 +75,23 @@ class AppText {
   static const String scanAgainId = 'Scan Lagi';
   static const String voiceButtonEn = 'Listen';
   static const String voiceButtonId = 'Dengar Suara';
-  
+
   static const String expiredSpeechEn = 'This product has expired. Expired on ';
-  static const String expiredSpeechId = 'Produk ini sudah kedaluwarsa dengan expired ';
-  
-  static const String safeSpeechEn = 'This product has not expired and is safe to consume before ';
-  static const String safeSpeechId = 'Produk ini tidak kedaluwarsa dan aman dikonsumsi sebelum ';
+  static const String expiredSpeechId =
+      'Produk ini sudah kedaluwarsa dengan expired ';
+
+  static const String safeSpeechEn =
+      'This product has not expired and is safe to consume before ';
+  static const String safeSpeechId =
+      'Produk ini tidak kedaluwarsa dan aman dikonsumsi sebelum ';
+
+  // ── Not Detected ──
+  static const String notDetectedLabelEn = 'Not Detected';
+  static const String notDetectedLabelId = 'Tidak Terdeteksi';
+  static const String notDetectedSpeechEn =
+      'Sorry, this product could not be detected. Please try again.';
+  static const String notDetectedSpeechId =
+      'Mohon maaf, untuk produk ini tidak terdeteksi, mohon ulang kembali.';
 
   /// Helper to get text based on language code.
   static String get(String enText, String idText, String languageCode) {

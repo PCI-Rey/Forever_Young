@@ -38,9 +38,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _completeOnboarding() async {
-    // We don't clear the stack so user can go back to info page as requested
+    // Mark setup as done so this flow never appears again
+    final settings = context.read<SettingsProvider>();
+    final navigator = Navigator.of(context);
+    await settings.markSetupComplete();
     if (mounted) {
-      AppRoutes.navigate(context, AppRoutes.scan);
+      navigator.pushNamedAndRemoveUntil(AppRoutes.scan, (route) => false);
     }
   }
 
@@ -64,13 +67,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 16, right: 20),
                       child: TextButton(
-                        onPressed: () {
-                          // Jump to the last slide
-                          _pageController.animateToPage(
-                            OnboardingModel.slides.length - 1,
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.fastOutSlowIn,
-                          );
+                        onPressed: () async {
+                          // Skip directly to Scan Product & mark setup complete
+                          final settings = context.read<SettingsProvider>();
+                          final navigator = Navigator.of(context);
+                          await settings.markSetupComplete();
+                          if (mounted) {
+                            navigator.pushNamedAndRemoveUntil(
+                              AppRoutes.scan,
+                              (route) => false,
+                            );
+                          }
                         },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

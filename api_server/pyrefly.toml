@@ -1,0 +1,2 @@
+# Pyrefly config — arahkan ke conda env yolo-parseq yang punya semua ML packages
+python_interpreter = "C:\\Users\\Reynaldi\\miniconda3\\envs\\yolo-parseq\\python.exe"
