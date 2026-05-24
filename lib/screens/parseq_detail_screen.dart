@@ -174,18 +174,33 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
                 },
                 children: [
                   SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                     child: _buildTrainingTab(),
                   ),
                   SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                     child: _buildValidationTab(),
                   ),
                   SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                     child: _buildTestingTab(isLandscape),
                   ),
                 ],
@@ -258,8 +273,6 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ),
     );
   }
-
-
 
   // ─── 1. TRAINING TAB ───
   Widget _buildTrainingTab() {
@@ -651,7 +664,11 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.table_rows_rounded, color: _parseqPrimary, size: 22),
+              const Icon(
+                Icons.table_rows_rounded,
+                color: _parseqPrimary,
+                size: 22,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -701,7 +718,8 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             child: SizedBox(
-              width: 600, // Accommodates columns + padding + border width (increased for download icon)
+              width:
+                  600, // Accommodates columns + padding + border width (increased for download icon)
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -787,16 +805,14 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
                                     ),
                                     _buildTableRowCell(
                                       ep.valNed != null
-                                          ? (ep.valNed! / 100.0)
-                                                .toStringAsFixed(4)
+                                          ? ep.valNed!.toStringAsFixed(4)
                                           : '-',
                                       100,
                                       isBest: isBest,
                                     ),
                                     _buildTableRowCell(
                                       ep.valAccuracy != null
-                                          ? (ep.valAccuracy! / 100.0)
-                                                .toStringAsFixed(4)
+                                          ? ep.valAccuracy!.toStringAsFixed(4)
                                           : '-',
                                       110,
                                       isBest: isBest,
@@ -843,11 +859,25 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         bold: true,
         horizontalAlign: ex.HorizontalAlign.Center,
         verticalAlign: ex.VerticalAlign.Center,
-        leftBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        rightBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        topBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        bottomBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        backgroundColorHex: ex.ExcelColor.fromHexString('#FFE0E0E0'), // subtle premium grey header background
+        leftBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        rightBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        topBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        bottomBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        backgroundColorHex: ex.ExcelColor.fromHexString(
+          '#FFE0E0E0',
+        ), // subtle premium grey header background
       );
 
       ex.CellStyle dataStyle = ex.CellStyle(
@@ -855,10 +885,22 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         fontSize: 12,
         horizontalAlign: ex.HorizontalAlign.Center,
         verticalAlign: ex.VerticalAlign.Center,
-        leftBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        rightBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        topBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        bottomBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
+        leftBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        rightBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        topBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        bottomBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
       );
 
       ex.CellStyle bestDataStyle = ex.CellStyle(
@@ -866,11 +908,25 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         fontSize: 12,
         horizontalAlign: ex.HorizontalAlign.Center,
         verticalAlign: ex.VerticalAlign.Center,
-        leftBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        rightBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        topBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        bottomBorder: ex.Border(borderStyle: ex.BorderStyle.Thin, borderColorHex: ex.ExcelColor.fromHexString('#FF000000')),
-        backgroundColorHex: ex.ExcelColor.fromHexString('#FFFFEE00'), // Premium Kuning Biasa Aja
+        leftBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        rightBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        topBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        bottomBorder: ex.Border(
+          borderStyle: ex.BorderStyle.Thin,
+          borderColorHex: ex.ExcelColor.fromHexString('#FF000000'),
+        ),
+        backgroundColorHex: ex.ExcelColor.fromHexString(
+          '#FFFFEE00',
+        ), // Premium Kuning Biasa Aja
       );
 
       // Define columns headers
@@ -880,11 +936,13 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         'val_NED',
         'val_accuracy',
         'val_loss',
-        'step'
+        'step',
       ];
 
       for (int col = 0; col < headers.length; col++) {
-        var cell = sheet.cell(ex.CellIndex.indexByColumnRow(columnIndex: col, rowIndex: 0));
+        var cell = sheet.cell(
+          ex.CellIndex.indexByColumnRow(columnIndex: col, rowIndex: 0),
+        );
         cell.value = ex.TextCellValue(headers[col]);
         cell.cellStyle = headerStyle;
       }
@@ -896,15 +954,17 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         final isBest = item.epoch == 16;
         List<dynamic> rowValues = [
           item.epoch,
-          item.loss ?? 0.0,
-          item.valNed ?? 0.0,
-          item.valAccuracy ?? 0.0,
-          item.valLoss ?? 0.0,
-          item.step
+          item.loss ?? "-",
+          item.valNed ?? "-",
+          item.valAccuracy ?? "-",
+          item.valLoss ?? "-",
+          item.step,
         ];
 
         for (int col = 0; col < rowValues.length; col++) {
-          var cell = sheet.cell(ex.CellIndex.indexByColumnRow(columnIndex: col, rowIndex: row + 1));
+          var cell = sheet.cell(
+            ex.CellIndex.indexByColumnRow(columnIndex: col, rowIndex: row + 1),
+          );
           final val = rowValues[col];
           if (val is int) {
             cell.value = ex.IntCellValue(val);
@@ -936,12 +996,19 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
             SnackBar(
               content: Row(
                 children: [
-                  const Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
                       'Excel PARSeq berhasil di-download!',
-                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -1032,8 +1099,8 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
                     Icon(
                       isSelected
                           ? (_sortAscending
-                              ? Icons.arrow_upward_rounded
-                              : Icons.arrow_downward_rounded)
+                                ? Icons.arrow_upward_rounded
+                                : Icons.arrow_downward_rounded)
                           : Icons.swap_vert_rounded,
                       color: isSelected ? Colors.white : Colors.white54,
                       size: 14,
@@ -1068,7 +1135,11 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
               fontWeight: isBest || isEpoch ? FontWeight.w900 : FontWeight.w600,
               color: isBest
                   ? (isEpoch ? _parseqAccent : AppColors.textPrimaryLight)
-                  : (isEpoch ? _parseqPrimary : (isLoss ? Colors.grey.shade600 : AppColors.textPrimaryLight)),
+                  : (isEpoch
+                        ? _parseqPrimary
+                        : (isLoss
+                              ? Colors.grey.shade600
+                              : AppColors.textPrimaryLight)),
             ),
           ),
           if (isEpoch && isBest) ...[
@@ -1076,7 +1147,9 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFB300), // Golden Amber for Peak Model Achievement!
+                color: const Color(
+                  0xFFFFB300,
+                ), // Golden Amber for Peak Model Achievement!
                 borderRadius: BorderRadius.circular(4),
               ),
               child: const Text(
@@ -1126,7 +1199,11 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.verified_rounded, color: _parseqPrimary, size: 22),
+              const Icon(
+                Icons.verified_rounded,
+                color: _parseqPrimary,
+                size: 22,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -1172,7 +1249,11 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.verified_user_rounded, color: _parseqPrimary, size: 22),
+              const Icon(
+                Icons.verified_user_rounded,
+                color: _parseqPrimary,
+                size: 22,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -1332,14 +1413,12 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
     );
   }
 
-
-
   static List<ParseqEpochData> _generateParseqEpochs() {
     return const [
       ParseqEpochData(
         epoch: 1,
         step: 6,
-        loss: 2.8451,
+        loss: null,
         valNed: 24.016637802124023,
         valAccuracy: 0.0,
         valLoss: 3.19141697883606,
@@ -1347,7 +1426,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 2,
         step: 13,
-        loss: 2.1245,
+        loss: null,
         valNed: 59.15032577514648,
         valAccuracy: 0.0,
         valLoss: 2.534039258956909,
@@ -1355,7 +1434,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 3,
         step: 20,
-        loss: 1.4512,
+        loss: null,
         valNed: 65.3594741821289,
         valAccuracy: 0.0,
         valLoss: 1.6870535612106323,
@@ -1363,7 +1442,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 4,
         step: 27,
-        loss: 0.8523,
+        loss: null,
         valNed: 74.80986022949219,
         valAccuracy: 5.882352828979492,
         valLoss: 0.957002818584442,
@@ -1371,7 +1450,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 5,
         step: 34,
-        loss: 0.4512,
+        loss: null,
         valNed: 93.32293701171876,
         valAccuracy: 78.4313735961914,
         valLoss: 0.575816810131073,
@@ -1379,7 +1458,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 6,
         step: 41,
-        loss: 0.2845,
+        loss: null,
         valNed: 96.53396606445312,
         valAccuracy: 90.19607543945312,
         valLoss: 0.3150745928287506,
@@ -1387,15 +1466,23 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 7,
         step: 48,
-        loss: 0.1985,
+        loss: null,
         valNed: 96.68746185302734,
         valAccuracy: 90.19607543945312,
         valLoss: 0.2175717651844024,
       ),
       ParseqEpochData(
         epoch: 8,
-        step: 55,
+        step: 49,
         loss: 0.1539188027381897,
+        valNed: null,
+        valAccuracy: null,
+        valLoss: null,
+      ),
+      ParseqEpochData(
+        epoch: 8,
+        step: 55,
+        loss: null,
         valNed: 98.21746826171876,
         valAccuracy: 92.1568603515625,
         valLoss: 0.13352732360363,
@@ -1403,7 +1490,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 9,
         step: 62,
-        loss: 0.1324,
+        loss: null,
         valNed: 98.21746826171876,
         valAccuracy: 92.1568603515625,
         valLoss: 0.1210628747940063,
@@ -1411,7 +1498,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 10,
         step: 69,
-        loss: 0.1154,
+        loss: null,
         valNed: 98.39572143554688,
         valAccuracy: 94.11764526367188,
         valLoss: 0.11081213504076,
@@ -1419,7 +1506,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 11,
         step: 76,
-        loss: 0.1021,
+        loss: null,
         valNed: 98.573974609375,
         valAccuracy: 94.11764526367188,
         valLoss: 0.1051701083779335,
@@ -1427,7 +1514,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 12,
         step: 83,
-        loss: 0.0985,
+        loss: null,
         valNed: 98.39572143554688,
         valAccuracy: 94.11764526367188,
         valLoss: 0.1361725479364395,
@@ -1435,7 +1522,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 13,
         step: 90,
-        loss: 0.0954,
+        loss: null,
         valNed: 98.75222778320312,
         valAccuracy: 94.11764526367188,
         valLoss: 0.1328419893980026,
@@ -1443,15 +1530,23 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 14,
         step: 97,
-        loss: 0.0912,
+        loss: null,
         valNed: 98.75222778320312,
         valAccuracy: 94.11764526367188,
         valLoss: 0.1029528677463531,
       ),
       ParseqEpochData(
         epoch: 15,
-        step: 104,
+        step: 99,
         loss: 0.0938536971807479,
+        valNed: null,
+        valAccuracy: null,
+        valLoss: null,
+      ),
+      ParseqEpochData(
+        epoch: 15,
+        step: 104,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0943222045898437,
@@ -1459,7 +1554,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 16,
         step: 111,
-        loss: 0.0854,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0887321531772613,
@@ -1467,7 +1562,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 17,
         step: 118,
-        loss: 0.0785,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0844166800379753,
@@ -1475,7 +1570,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 18,
         step: 125,
-        loss: 0.0712,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0902735665440559,
@@ -1483,7 +1578,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 19,
         step: 132,
-        loss: 0.0685,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0875763148069381,
@@ -1491,7 +1586,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 20,
         step: 139,
-        loss: 0.0545,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0852272436022758,
@@ -1499,15 +1594,23 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 21,
         step: 146,
-        loss: 0.0485,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0819150879979133,
       ),
       ParseqEpochData(
         epoch: 22,
-        step: 153,
+        step: 149,
         loss: 0.0382165722548961,
+        valNed: null,
+        valAccuracy: null,
+        valLoss: null,
+      ),
+      ParseqEpochData(
+        epoch: 22,
+        step: 153,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0794368684291839,
@@ -1515,7 +1618,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 23,
         step: 160,
-        loss: 0.0354,
+        loss: null,
         valNed: 99.10873413085938,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0801483169198036,
@@ -1523,7 +1626,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 24,
         step: 167,
-        loss: 0.0312,
+        loss: null,
         valNed: 99.2869873046875,
         valAccuracy: 96.07843017578124,
         valLoss: 0.0745881050825119,
@@ -1531,7 +1634,7 @@ class _ParseqDetailScreenState extends State<ParseqDetailScreen> {
       ParseqEpochData(
         epoch: 25,
         step: 174,
-        loss: 0.0284,
+        loss: null,
         valNed: 99.64349365234376,
         valAccuracy: 96.07843017578124,
         valLoss: 0.1362217962741851,
