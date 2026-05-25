@@ -159,8 +159,8 @@ class _ScanScreenState extends State<ScanScreen>
     // Kasus: tidak terdeteksi
     if (!_scanResult.isSuccess) {
       final phrase = settings.tr(
-        'Not detected.',
-        'Tidak terdeteksi.',
+        'Sorry, the date on this packaging was not detected. Please try again.',
+        'Mohon Maaf untuk tanggal pada kemasan ini tidak terdeteksi, coba kembali',
       );
       await _ttsService.speak(phrase, lang);
       return;
@@ -178,8 +178,8 @@ class _ScanScreenState extends State<ScanScreen>
 
     if (spokenDate.isEmpty) {
       final phrase = settings.tr(
-        'Not detected.',
-        'Tidak terdeteksi.',
+        'Sorry, the date on this packaging was not detected. Please try again.',
+        'Mohon Maaf untuk tanggal pada kemasan ini tidak terdeteksi, coba kembali',
       );
       await _ttsService.speak(phrase, lang);
       return;
