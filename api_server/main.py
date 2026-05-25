@@ -538,7 +538,7 @@ def run_pipeline(img: Image.Image):
             prod_best = with_text[0]
             exp_best  = with_text[-1]
         elif len(with_text) == 1:
-            if len(dues) > len(prods):
+            if len(dues) >= len(prods):
                 exp_best  = with_text[0]
             else:
                 prod_best = with_text[0]
