@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     // Navigate to next screen after a gentle delay
-    Future.delayed(const Duration(milliseconds: 3800), () {
+    Future.delayed(const Duration(milliseconds: 4000), () {
       if (!mounted || _showPasswordOverlay) return;
       final settings = context.read<SettingsProvider>();
       if (settings.hasCompletedSetup) {

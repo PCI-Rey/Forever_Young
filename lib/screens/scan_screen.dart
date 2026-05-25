@@ -176,7 +176,14 @@ class _ScanScreenState extends State<ScanScreen>
       isProduction = true;
     }
 
-    if (spokenDate.isEmpty) return;
+    if (spokenDate.isEmpty) {
+      final phrase = settings.tr(
+        'Not detected.',
+        'Tidak terdeteksi.',
+      );
+      await _ttsService.speak(phrase, lang);
+      return;
+    }
 
     String phrase;
     if (isProduction) {
