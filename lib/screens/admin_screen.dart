@@ -7,6 +7,7 @@ import '../constants/app_colors.dart';
 import '../providers/settings_provider.dart';
 import '../routes/app_routes.dart';
 import '../screens/splash_screen.dart';
+import '../utils/responsive_helper.dart';
 import 'yolo_detail_screen.dart';
 import 'parseq_detail_screen.dart';
 
@@ -45,24 +46,24 @@ class _AdminScreenState extends State<AdminScreen>
       body: Stack(
         children: [
           Positioned(
-            top: -100,
-            left: -100,
+            top: -100.rh,
+            left: -100.rw,
             child: _buildBlob(
               AppColors.primaryLight.withValues(alpha: 0.35),
-              320,
+              320.r,
             ),
           ),
           Positioned(
-            bottom: -150,
-            right: -50,
-            child: _buildBlob(AppColors.warmCoral.withValues(alpha: 0.15), 380),
+            bottom: -150.rh,
+            right: -50.rw,
+            child: _buildBlob(AppColors.warmCoral.withValues(alpha: 0.15), 380.r),
           ),
           Positioned(
-            top: 250,
-            right: -120,
+            top: 250.rh,
+            right: -120.rw,
             child: _buildBlob(
               AppColors.primaryDark.withValues(alpha: 0.2),
-              260,
+              260.r,
             ),
           ),
           BackdropFilter(
@@ -95,11 +96,11 @@ class _AdminScreenState extends State<AdminScreen>
 
                 // ── Header ──
                 Padding(
-                  padding: const EdgeInsets.only(top: 4, bottom: 16),
+                  padding: EdgeInsets.only(top: 4.rh, bottom: 16.rh),
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(18),
+                        padding: EdgeInsets.all(18.r),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -116,15 +117,15 @@ class _AdminScreenState extends State<AdminScreen>
                         ),
                         child: Icon(
                           Icons.admin_panel_settings_rounded,
-                          size: 52,
+                          size: 52.sp,
                           color: AppColors.warmCoral,
                         ),
                       ),
-                      const SizedBox(height: 14),
-                      const Text(
+                      SizedBox(height: 14.rh),
+                      Text(
                         'ADMIN PANEL',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w900,
                           color: AppColors.primaryVariant,
                           letterSpacing: 2.5,
@@ -190,7 +191,7 @@ class _AdminScreenState extends State<AdminScreen>
 
                 // ── Quit Button ──
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+                  padding: EdgeInsets.fromLTRB(24.rw, 8.rh, 24.rw, 28.rh),
                   child: SizedBox(
                     width: double.infinity,
                     child: _QuitButton(onTap: () => exit(0)),
@@ -295,7 +296,7 @@ class _EvaluationTabState extends State<_EvaluationTab> {
                 padding: const EdgeInsets.all(3),
                 child: Row(
                   children: [
-                    _buildDatasetToggleItem('yolo', 'YOLOv11'),
+                    _buildDatasetToggleItem('yolo', 'YOLOv11m'),
                     _buildDatasetToggleItem('parseq', 'PARSeq'),
                   ],
                 ),

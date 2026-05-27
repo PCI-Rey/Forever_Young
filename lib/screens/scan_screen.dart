@@ -11,6 +11,7 @@ import '../providers/settings_provider.dart';
 import '../screens/onboarding_screen.dart';
 import '../services/ml_scan_service.dart';
 import '../services/tts_service.dart';
+import '../utils/responsive_helper.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
@@ -419,31 +420,31 @@ class _ScanScreenState extends State<ScanScreen>
                 MaterialPageRoute(builder: (_) => const OnboardingScreen()),
               );
             },
-            icon: const Icon(Icons.info_outline_rounded, size: 26),
+            icon: Icon(Icons.info_outline_rounded, size: 26.sp),
             tooltip: settings.tr('About', 'Tentang'),
           ),
           const SizedBox(width: 4),
           Padding(
-            padding: const EdgeInsets.only(right: 12),
+            padding: EdgeInsets.only(right: 12.rw),
             child: TextButton.icon(
               onPressed: () => SystemNavigator.pop(),
-              icon: const Icon(Icons.exit_to_app_rounded, size: 22),
+              icon: Icon(Icons.exit_to_app_rounded, size: 22.sp),
               label: Text(
                 settings.tr('Exit', 'Keluar'),
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.error,
                 backgroundColor: AppColors.error.withValues(alpha: 0.08),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.rw,
+                  vertical: 8.rh,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
             ),
@@ -526,21 +527,21 @@ class _ScanScreenState extends State<ScanScreen>
                 Expanded(
                   flex: 6,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.rw,
+                      vertical: 10.rh,
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                       child: _buildCameraPreview(theme, isLight),
                     ),
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.rh),
 
                 // ── Instruction ──
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  padding: EdgeInsets.symmetric(horizontal: 28.rw),
                   child: Text(
                     settings.tr(
                       AppText.scanInstructionEn,
@@ -548,40 +549,40 @@ class _ScanScreenState extends State<ScanScreen>
                     ),
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                SizedBox(height: 16.rh),
 
                 // ── Single Dynamic Result Box ──
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 28),
-                  padding: const EdgeInsets.all(18),
+                  margin: EdgeInsets.symmetric(horizontal: 28.rw),
+                  padding: EdgeInsets.all(18.r),
                   decoration: BoxDecoration(
                     color: bgColor,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(color: borderColor, width: 1.5),
                   ),
                   child: Row(
                     children: [
-                      Icon(boxIcon, size: 32, color: boxColor),
-                      const SizedBox(width: 16),
+                      Icon(boxIcon, size: 32.sp, color: boxColor),
+                      SizedBox(width: 16.rw),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               boxTitle,
-                              style: theme.textTheme.bodyMedium?.copyWith(fontSize: 14),
+                              style: theme.textTheme.bodyMedium?.copyWith(fontSize: 14.sp),
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4.rh),
                             Text(
                               boxValue,
                               style: theme.textTheme.headlineMedium?.copyWith(
-                                fontSize: 22,
+                                fontSize: 22.sp,
                                 fontWeight: FontWeight.w700,
                                 color: _isScanning ? null : boxColor,
                               ),
@@ -593,11 +594,11 @@ class _ScanScreenState extends State<ScanScreen>
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.rh),
 
                 // ── Buttons ──
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  padding: EdgeInsets.symmetric(horizontal: 28.rw),
                   child: AnimatedBuilder(
                     animation: _pulseAnimation,
                     builder: (context, child) {
@@ -612,7 +613,7 @@ class _ScanScreenState extends State<ScanScreen>
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.rh),
               ],
             ),
           ),
@@ -685,8 +686,8 @@ class _ScanScreenState extends State<ScanScreen>
               // Corner Borders for the viewfinder
               Center(
                 child: SizedBox(
-                  width: 260,
-                  height: 260,
+                  width: 260.rw,
+                  height: 260.rw,
                   child: CustomPaint(
                     painter: ScannerFramePainter(
                       color: AppColors.scanFrame,
@@ -698,17 +699,18 @@ class _ScanScreenState extends State<ScanScreen>
               // Moving Laser Line Animation inside the viewfinder
               Center(
                 child: SizedBox(
-                  width: 260,
-                  height: 260,
+                  width: 260.rw,
+                  height: 260.rw,
                   child: AnimatedBuilder(
                     animation: _scannerController,
                     builder: (context, child) {
                       final double value = _scannerController.value;
+                      final double frameSize = 260.rw;
                       // Move laser line up and down
                       return Stack(
                         children: [
                           Positioned(
-                            top: value * 250 + 5,
+                            top: value * (frameSize - 10) + 5,
                             left: 10,
                             right: 10,
                             child: Container(
@@ -781,7 +783,7 @@ class _ScanScreenState extends State<ScanScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.r),
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
@@ -792,22 +794,22 @@ class _ScanScreenState extends State<ScanScreen>
               ),
               child: Icon(
                 Icons.center_focus_strong_rounded,
-                size: 58,
+                size: 58.sp,
                 color: theme.colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.rh),
             Text(
               settings.tr('Tap to Open Camera', 'Ketuk untuk Membuka Kamera'),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 20.sp,
                 color: theme.colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.rh),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 40.rw),
               child: Text(
                 settings.tr(
                   'Activate camera to scan product expiry date',
@@ -816,7 +818,7 @@ class _ScanScreenState extends State<ScanScreen>
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ),
@@ -865,17 +867,17 @@ class _ScanScreenState extends State<ScanScreen>
       if (_isScanning) {
         return SizedBox(
           width: double.infinity,
-          height: 62,
+          height: 62.rh,
           child: ElevatedButton.icon(
             onPressed: null,
-            icon: const SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
+            icon: SizedBox(
+              width: 24.r,
+              height: 24.r,
+              child: const CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
             ),
             label: Text(
               settings.tr(AppText.scanningEn, AppText.scanningId),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
             ),
           ),
         );
@@ -885,34 +887,34 @@ class _ScanScreenState extends State<ScanScreen>
         children: [
           SizedBox(
             width: double.infinity,
-            height: 60,
+            height: 60.rh,
             child: ElevatedButton.icon(
               onPressed: _speakResult,
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.colorScheme.primaryContainer,
                 foregroundColor: theme.colorScheme.onPrimaryContainer,
               ),
-              icon: const Icon(Icons.volume_up_rounded, size: 26),
+              icon: Icon(Icons.volume_up_rounded, size: 26.sp),
               label: Text(
                 settings.tr(AppText.voiceButtonEn, AppText.voiceButtonId),
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.rh),
           SizedBox(
             width: double.infinity,
-            height: 60,
+            height: 60.rh,
             child: ElevatedButton.icon(
               onPressed: _deleteImage,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error,
                 foregroundColor: Colors.white,
               ),
-              icon: const Icon(Icons.delete_forever_rounded, size: 26),
+              icon: Icon(Icons.delete_forever_rounded, size: 26.sp),
               label: Text(
                 settings.tr('Delete Image', 'Hapus Gambar'),
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -925,26 +927,26 @@ class _ScanScreenState extends State<ScanScreen>
         children: [
           SizedBox(
             width: double.infinity,
-            height: 62,
+            height: 62.rh,
             child: ElevatedButton.icon(
               onPressed: _activateCamera,
-              icon: const Icon(Icons.camera_alt_rounded, size: 26),
+              icon: Icon(Icons.camera_alt_rounded, size: 26.sp),
               label: Text(
                 settings.tr('Open Camera', 'Buka Kamera'),
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.rh),
           SizedBox(
             width: double.infinity,
-            height: 50,
+            height: 50.rh,
             child: OutlinedButton.icon(
               onPressed: _scanFromGallery,
-              icon: const Icon(Icons.photo_library_rounded, size: 22),
+              icon: Icon(Icons.photo_library_rounded, size: 22.sp),
               label: Text(
                 settings.tr('Scan from Gallery', 'Scan dari Galeri'),
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -956,20 +958,20 @@ class _ScanScreenState extends State<ScanScreen>
       children: [
         SizedBox(
           width: double.infinity,
-          height: 62,
+          height: 62.rh,
           child: ElevatedButton.icon(
             onPressed: _performScan,
-            icon: const Icon(Icons.qr_code_scanner_rounded, size: 26),
+            icon: Icon(Icons.qr_code_scanner_rounded, size: 26.sp),
             label: Text(
               settings.tr('Capture & Scan', 'Ambil & Pindai'),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.rh),
         SizedBox(
           width: double.infinity,
-          height: 50,
+          height: 50.rh,
           child: OutlinedButton.icon(
             onPressed: () {
               setState(() {
@@ -980,10 +982,10 @@ class _ScanScreenState extends State<ScanScreen>
               foregroundColor: AppColors.error,
               side: const BorderSide(color: AppColors.error),
             ),
-            icon: const Icon(Icons.close_rounded, size: 22),
+            icon: Icon(Icons.close_rounded, size: 22.sp),
             label: Text(
               settings.tr('Cancel', 'Batal'),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
             ),
           ),
         ),
@@ -1079,8 +1081,8 @@ class ScannerOverlayClipper extends CustomClipper<Path> {
     final path = Path()
       ..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
 
-    const double cutoutWidth = 260.0;
-    const double cutoutHeight = 260.0;
+    final double cutoutWidth = 260.0.rw;
+    final double cutoutHeight = 260.0.rw;
     final double left = (size.width - cutoutWidth) / 2;
     final double top = (size.height - cutoutHeight) / 2;
 
@@ -1095,7 +1097,7 @@ class ScannerOverlayClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }
 
 // ── WA-style Viewfinder Corner Painter ──

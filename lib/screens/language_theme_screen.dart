@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../constants/app_text.dart';
 import '../providers/settings_provider.dart';
 import '../routes/app_routes.dart';
+import '../utils/responsive_helper.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/language_selector.dart';
 import '../widgets/theme_selector.dart';
@@ -33,7 +34,7 @@ class LanguageThemeScreen extends StatelessWidget {
                   // ── Icon header ──
                   Center(
                     child: Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(24.r),
                       decoration: BoxDecoration(
                         color: Theme.of(context)
                             .colorScheme
@@ -43,12 +44,12 @@ class LanguageThemeScreen extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.settings_suggest_rounded,
-                        size: 64,
+                        size: 64.sp,
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.rh),
                   Center(
                     child: Text(
                       settings.tr('Welcome!', 'Selamat Datang!'),
@@ -56,7 +57,7 @@ class LanguageThemeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.rh),
                   Center(
                     child: Text(
                       settings.tr(
@@ -79,9 +80,9 @@ class LanguageThemeScreen extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(fontSize: 22),
+                        ?.copyWith(fontSize: 22.sp),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.rh),
                   LanguageSelector(
                     selectedLanguage: lang,
                     onChanged: (code) => settings.setLanguage(code),
@@ -98,9 +99,9 @@ class LanguageThemeScreen extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(fontSize: 22),
+                        ?.copyWith(fontSize: 22.sp),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.rh),
                   ThemeSelector(
                     isDarkMode: settings.isDarkMode,
                     onChanged: (isDark) {

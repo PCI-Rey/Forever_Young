@@ -9,6 +9,7 @@ import '../routes/app_routes.dart';
 import '../screens/admin_screen.dart';
 import '../screens/language_theme_screen.dart';
 import '../screens/scan_screen.dart';
+import '../utils/responsive_helper.dart';
 
 /// Premium, Playful, and Warm Splash Screen — Designed for elderly accessibility.
 /// Features a warm background, soft glow blobs with a modern glassmorphism blur,
@@ -175,27 +176,27 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             // ─── Premium Glassmorphism Background Blobs ───
             Positioned(
-              top: -100,
-              left: -100,
+              top: -100.rh,
+              left: -100.rw,
               child: _buildBlob(
                 AppColors.primaryLight.withValues(alpha: 0.35),
-                320,
+                320.r,
               ),
             ),
             Positioned(
-              bottom: -150,
-              right: -50,
+              bottom: -150.rh,
+              right: -50.rw,
               child: _buildBlob(
                 AppColors.warmCoral.withValues(alpha: 0.15),
-                380,
+                380.r,
               ),
             ),
             Positioned(
-              top: 250,
-              right: -120,
+              top: 250.rh,
+              right: -120.rw,
               child: _buildBlob(
                 AppColors.primaryDark.withValues(alpha: 0.2),
-                260,
+                260.r,
               ),
             ),
 
@@ -223,7 +224,7 @@ class _SplashScreenState extends State<SplashScreen>
                       return Transform.scale(
                         scale: currentScale,
                         child: Container(
-                          padding: const EdgeInsets.all(28),
+                          padding: EdgeInsets.all(28.r),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
@@ -243,12 +244,12 @@ class _SplashScreenState extends State<SplashScreen>
                             children: [
                               Icon(
                                 Icons.favorite_rounded,
-                                size: 85,
+                                size: 85.sp,
                                 color: AppColors.warmCoral,
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.add_rounded,
-                                size: 40,
+                                size: 40.sp,
                                 color: Colors.white,
                               ),
                             ],
@@ -258,7 +259,7 @@ class _SplashScreenState extends State<SplashScreen>
                     },
                   ),
 
-                  const SizedBox(height: 48),
+                  SizedBox(height: 48.rh),
 
                   // Gentle Sliding Text
                   SlideTransition(
@@ -269,18 +270,18 @@ class _SplashScreenState extends State<SplashScreen>
                         children: [
                           Text(
                             AppText.appName.toUpperCase(),
-                            style: const TextStyle(
-                              fontSize: 34,
+                            style: TextStyle(
+                              fontSize: 34.sp,
                               fontWeight: FontWeight.w900,
                               color: AppColors.primaryVariant,
                               letterSpacing: 2.0,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.rh),
                           Text(
                             "Your Health, Our Priority",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
                               color: AppColors.warmCoral.withValues(alpha: 0.9),
                               letterSpacing: 0.5,
@@ -323,6 +324,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
+
 
 // ─── Password State Enum ───
 enum _PasswordState { idle, correct, wrong }
@@ -433,10 +435,10 @@ class _PasswordOverlayState extends State<_PasswordOverlay>
                   );
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 40),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 36,
+                  margin: EdgeInsets.symmetric(horizontal: 40.rw),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 28.rw,
+                    vertical: 36.rh,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -454,39 +456,39 @@ class _PasswordOverlayState extends State<_PasswordOverlay>
                     children: [
                       // Lock icon
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.r),
                         decoration: BoxDecoration(
                           color: AppColors.softPeach,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.lock_rounded,
-                          size: 36,
+                          size: 36.sp,
                           color: AppColors.primaryVariant,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.rh),
 
                       // Title
-                      const Text(
+                      Text(
                         'Admin Access',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 22.sp,
                           fontWeight: FontWeight.w800,
                           color: AppColors.primaryVariant,
                           letterSpacing: 0.5,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: 6.rh),
                       Text(
                         'Masukkan PIN untuk melanjutkan',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: Colors.grey.shade500,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 28),
+                      SizedBox(height: 28.rh),
 
                       // ─── PIN Dot Indicators ───
                       Row(
@@ -506,9 +508,9 @@ class _PasswordOverlayState extends State<_PasswordOverlay>
                           }
                           return AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            width: 18,
-                            height: 18,
+                            margin: EdgeInsets.symmetric(horizontal: 8.rw),
+                            width: 18.r,
+                            height: 18.r,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: filled ? dotColor : Colors.grey.shade200,
@@ -520,7 +522,7 @@ class _PasswordOverlayState extends State<_PasswordOverlay>
                           );
                         }),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24.rh),
 
                       // ─── Hidden numeric-only TextField ───
                       AnimatedContainer(
@@ -546,22 +548,22 @@ class _PasswordOverlayState extends State<_PasswordOverlay>
                           textAlign: TextAlign.center,
                           maxLength: 4,
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.w800,
                             color: _boxColor,
                             letterSpacing: 8,
                           ),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             counterText: '',
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 14,
+                              horizontal: 16.rw,
+                              vertical: 14.rh,
                             ),
                             hintText: '• • • •',
                             hintStyle: TextStyle(
-                              color: Color(0xFFCBD5E1),
-                              fontSize: 24,
+                              color: const Color(0xFFCBD5E1),
+                              fontSize: 24.sp,
                               letterSpacing: 8,
                             ),
                           ),

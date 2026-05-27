@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/onboarding_model.dart';
+import '../utils/responsive_helper.dart';
 
 /// A single onboarding slide card with icon, title, and description.
 /// Large text and generous spacing for elderly users.
@@ -33,7 +34,7 @@ class OnboardingCard extends StatelessWidget {
 
     return Center(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 32.0.rw, vertical: 20.rh),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -58,25 +59,25 @@ class OnboardingCard extends StatelessWidget {
                 color: theme.colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 40.rh),
 
             // Title
             Text(
               data.getTitle(languageCode),
               textAlign: TextAlign.center,
               style: theme.textTheme.headlineLarge?.copyWith(
-                fontSize: 28,
+                fontSize: 28.sp,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.rh),
 
             // Description
             Text(
               data.getDescription(languageCode),
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
-                fontSize: 18,
+                fontSize: 18.sp,
                 height: 1.6,
               ),
             ),

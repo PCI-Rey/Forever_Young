@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../utils/responsive_helper.dart';
 
 /// A large, accessible button designed for elderly users.
 /// Features: large tap target, readable text, optional icon, loading state.
@@ -45,7 +46,7 @@ class CustomButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppTheme.borderRadius),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 24.rw, vertical: 12.rh),
           ),
           child: _buildChild(theme, isOutlined: true),
         ),
@@ -71,8 +72,8 @@ class CustomButton extends StatelessWidget {
   Widget _buildChild(ThemeData theme, {bool isOutlined = false}) {
     if (isLoading) {
       return SizedBox(
-        height: 28,
-        width: 28,
+        height: 28.r,
+        width: 28.r,
         child: CircularProgressIndicator(
           strokeWidth: 3,
           valueColor: AlwaysStoppedAnimation<Color>(
@@ -87,12 +88,12 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 26),
-          const SizedBox(width: 12),
+          Icon(icon, size: 26.sp),
+          SizedBox(width: 12.rw),
           Text(
             text,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w600,
               color: textColor,
             ),
@@ -104,7 +105,7 @@ class CustomButton extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 20.sp,
         fontWeight: FontWeight.w600,
         color: textColor,
       ),

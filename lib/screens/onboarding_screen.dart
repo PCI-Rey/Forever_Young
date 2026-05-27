@@ -4,6 +4,7 @@ import '../constants/app_text.dart';
 import '../models/onboarding_model.dart';
 import '../providers/settings_provider.dart';
 import '../routes/app_routes.dart';
+import '../utils/responsive_helper.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/onboarding_card.dart';
 
@@ -65,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Align(
                     alignment: Alignment.topRight,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 16, right: 20),
+                      padding: EdgeInsets.only(top: 16.rh, right: 20.rw),
                       child: TextButton(
                         onPressed: () async {
                           // Skip directly to Scan Product & mark setup complete
@@ -80,15 +81,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           }
                         },
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.rw,
+                            vertical: 12.rh,
                           ),
                         ),
                         child: Text(
                           settings.tr(AppText.skipEn, AppText.skipId),
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w500,
                             color: Theme.of(context).colorScheme.primary,
                           ),
@@ -97,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   )
                 else
-                  const SizedBox(height: 64), // Maintain layout height when skipped button is hidden
+                  SizedBox(height: 64.rh), // Maintain layout height when skipped button is hidden
 
                 // ─── Page Content ───
                 Expanded(
@@ -118,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                 // ─── Dot Indicators ───
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
+                  padding: EdgeInsets.only(bottom: 24.rh),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -130,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                 // ─── Navigation Button ───
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  padding: EdgeInsets.symmetric(horizontal: 28.rw),
                   child: CustomButton(
                     text: isLastPage
                         ? settings.tr(AppText.getStartedEn, AppText.getStartedId)
@@ -142,7 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.rh),
               ],
             ),
           ),
@@ -155,14 +156,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final isActive = index == _currentPage;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      margin: const EdgeInsets.symmetric(horizontal: 6),
-      width: isActive ? 28 : 10,
-      height: 10,
+      margin: EdgeInsets.symmetric(horizontal: 6.rw),
+      width: isActive ? 28.rw : 10.rw,
+      height: 10.rw,
       decoration: BoxDecoration(
         color: isActive
             ? Theme.of(context).colorScheme.primary
             : Theme.of(context).colorScheme.primary.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(5.r),
       ),
     );
   }

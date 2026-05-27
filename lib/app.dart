@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'providers/settings_provider.dart';
 import 'routes/app_routes.dart';
 import 'theme/app_theme.dart';
+import 'utils/responsive_helper.dart';
 
 /// Root application widget.
 /// Configures theming, routing, and state management.
@@ -25,6 +26,12 @@ class ForeverYoungApp extends StatelessWidget {
       // Routes
       initialRoute: AppRoutes.splash,
       routes: AppRoutes.routes,
+
+      // Initialize responsive helper with real device dimensions
+      builder: (context, child) {
+        AppResponsive.init(context);
+        return child!;
+      },
     );
   }
 }
